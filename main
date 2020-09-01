@@ -1,0 +1,103 @@
+using System;
+using System.Globalization;
+
+namespace Programa_contaBanco
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            OpBanco conta;
+            double Quantia;
+
+            Console.Write("Informe o n° de sua conta: ");
+            int Numero = int.Parse(Console.ReadLine()); //Inserção do número da conta.
+
+            Console.WriteLine();
+
+            Console.Write("Informe seu nome completo: ");
+            string Nome = Console.ReadLine(); //Inserção do nome.
+
+            Console.WriteLine();
+
+            Console.Write("Deseja realizar um depósito inicial (S/N)? ");
+            char Op = char.Parse(Console.ReadLine()); // Dependendo do dado inserido AQUI, alterará o IF na linha 23.
+
+            Console.WriteLine();
+
+            if (Op == 's' || Op == 'S') //SE o usuário escolheu S (SIM) as instruções abaixo serão processadas.
+            {
+                Console.Write("Insira o valor do deposito: R$");
+                double depositoInicial = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture); // depositoInicial recebe o valor do deposito
+                Console.WriteLine();
+                conta = new OpBanco(Numero, Nome, depositoInicial); //A Variavel conta recebe as informações contida no método OpBanco com os parâmetros NUMERO, NOME E DEPOSITO.
+            }
+            else //Caso o usuário escolher N (Não) as instruções abaixo serão processadas.
+            {
+                conta = new OpBanco(Numero, Nome); //A Variavel conta recebe as informações contida no método OpBanco com os parâmetros NUMERO E NOME.
+            }
+            Console.WriteLine();
+            Console.WriteLine("===============================================================");
+            Console.WriteLine();
+
+            Console.WriteLine("Bem-vindo ao caixa eletrônico");
+            Console.WriteLine(" *Escolha as opções digitando seus respectivos números.");
+            Console.WriteLine();
+            Console.WriteLine("1- Saque (R$ 5.00 de taxa)");
+            Console.WriteLine();
+            Console.WriteLine("2- Depósito");                   // MENU 
+            Console.WriteLine();
+            Console.WriteLine("3- Sair");
+            Console.WriteLine();
+            Console.Write("Opção: ");
+            int op1 = int.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.WriteLine("===============================================================");
+            Console.WriteLine();
+
+
+            switch (op1) //SWITCH que receberá a opção
+            {
+
+                case 1: //OPÇÃO SAQUE
+
+                    Console.Write("Insira um valor para saque: R$");
+                    Quantia = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    conta.Saque(Quantia);
+
+                    Console.WriteLine();
+                    Console.WriteLine(conta);
+
+                    break;
+
+                case 2: //OPÇÃO DEPÓSITO
+
+                    Console.Write("Insira um valor para depósito: R$");
+                    Quantia = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    conta.Deposito(Quantia);
+
+                    Console.WriteLine();
+                    Console.WriteLine(conta);
+
+                    break;
+
+                case 3: //OPÇÃO SAIR
+
+                    Console.WriteLine();
+                    Console.Write("Operação finalizada! ");
+                    Console.WriteLine();
+
+                    return;
+
+                default: //ENTRADA INVALIDA
+
+                    Console.WriteLine();
+                    Console.Write("Operação inválida! ");
+                    Console.WriteLine();
+
+                    break;
+            }
+        }
+    }
+}
