@@ -9,28 +9,28 @@ namespace Programa_contaBanco
         public string Nome { get; set; }
         public double Saldo { get; private set; }
 
-        public OpBanco(int numero, string nome) 
+        public OpBanco(int numero, string nome) //Caso o usuário não queira realizar o depósito irá imprimir esse construtor.
         {
             Numero = numero;
             Nome = nome;
         }
 
-        public OpBanco(int numero, string nome, double saldo) : this(numero, nome)
+        public OpBanco(int numero, string nome, double saldo) : this(numero, nome) //Caso o usuário queira realizar o depósito inicial, irá imprimir esse construtor.
         {
             Saldo = saldo;
         }
 
-        public void Deposito( double quantia)
+        public void Deposito( double quantia) //Método que faz o calculo soma da QUANTIA com o SALDO.
         {
             Saldo += quantia;
         }
 
-        public void Saque(double quantia)
+        public void Saque(double quantia)  //Método que faz o calculo da subtração do Saque com o Saldo.
         {
             Saldo -= quantia;
             Saldo -= 5.00;
         }
-        public override string ToString()
+        public override string ToString() //IMPRIME os dados contidos nas variaveis NUMERO, NOME e SALDO, através do CONSOLE.WRITELINE(conta) na classe program
         {
             return "Dados da conta atualizados: \n"
                 +"Conta "
